@@ -33,3 +33,8 @@ export const loadStatsFromLocalStorage = () => {
   const stats = localStorage.getItem(gameStatKey)
   return stats ? (JSON.parse(stats) as GameStats) : null
 }
+
+export const clearGameStateFromLocalStorage = () => {
+  localStorage.setItem(gameStateKey, '')
+  localStorage.setItem(gameStatKey, '')
+}

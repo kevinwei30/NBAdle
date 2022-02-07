@@ -3,6 +3,8 @@ import {
   ChartBarIcon,
   SunIcon,
   MoonIcon,
+  LightBulbIcon,
+  RefreshIcon,
 } from '@heroicons/react/outline'
 import { useState, useEffect } from 'react'
 import { Alert } from './components/alerts/Alert'
@@ -11,6 +13,7 @@ import { Keyboard } from './components/keyboard/Keyboard'
 import { AboutModal } from './components/modals/AboutModal'
 import { InfoModal } from './components/modals/InfoModal'
 import { StatsModal } from './components/modals/StatsModal'
+import { HintsModal } from './components/modals/HintsModal'
 import {
   GAME_TITLE,
   WIN_MESSAGES,
@@ -26,6 +29,7 @@ import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
+  clearGameStateFromLocalStorage,
 } from './lib/localStorage'
 
 import './App.css'
@@ -43,6 +47,7 @@ function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
+  const [isHintsModalOpen, setIsHintsModalOpen] = useState(false)
   const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
   const [isGameLost, setIsGameLost] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(
@@ -110,6 +115,12 @@ function App() {
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
+      // if (currentGuess.length === 0 ||
+      //   currentGuess.slice(currentGuess.length - 1) === ' ') {
+      //   value = value.toUpperCase()
+      // } else {
+      //   value = value.toLowerCase()
+      // }
       setCurrentGuess(`${currentGuess}${value}`)
     }
   }
@@ -122,7 +133,8 @@ function App() {
     if (isGameWon || isGameLost) {
       return
     }
-    if (!(currentGuess.length === MAX_WORD_LENGTH)) {
+    // if (!(currentGuess.length === MAX_WORD_LENGTH)) {
+    if (!(currentGuess.length > 3)) {
       setIsNotEnoughLetters(true)
       return setTimeout(() => {
         setIsNotEnoughLetters(false)
@@ -139,11 +151,11 @@ function App() {
     const winningWord = isWinningWord(currentGuess)
 
     if (
-      currentGuess.length === MAX_WORD_LENGTH &&
+      // currentGuess.length === MAX_WORD_LENGTH &&
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
-      setGuesses([...guesses, currentGuess])
+      setGuesses([...guesses, currentGuess.padEnd(MAX_WORD_LENGTH, '-')])
       setCurrentGuess('')
 
       if (winningWord) {
@@ -179,6 +191,17 @@ function App() {
           className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
           onClick={() => setIsInfoModalOpen(true)}
         />
+        <RefreshIcon
+          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+          onClick={() => {
+            clearGameStateFromLocalStorage()
+            window.location.reload()
+          }}
+        />
+        <LightBulbIcon
+          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+          onClick={() => setIsHintsModalOpen(true)}
+        />
         <ChartBarIcon
           className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
           onClick={() => setIsStatsModalOpen(true)}
@@ -206,6 +229,11 @@ function App() {
           setSuccessAlert(GAME_COPIED_MESSAGE)
           return setTimeout(() => setSuccessAlert(''), ALERT_TIME_MS)
         }}
+      />
+      <HintsModal
+        isOpen={isHintsModalOpen}
+        handleClose={() => setIsHintsModalOpen(false)}
+        guesses={guesses}
       />
       <AboutModal
         isOpen={isAboutModalOpen}

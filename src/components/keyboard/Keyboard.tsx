@@ -2,7 +2,7 @@ import { KeyValue } from '../../lib/keyboard'
 import { getStatuses } from '../../lib/statuses'
 import { Key } from './Key'
 import { useEffect } from 'react'
-import { ENTER_TEXT, DELETE_TEXT } from '../../constants/strings'
+import { ENTER_TEXT, DELETE_TEXT, SPACE_TEXT } from '../../constants/strings'
 
 type Props = {
   onChar: (value: string) => void
@@ -30,6 +30,8 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
         onEnter()
       } else if (e.code === 'Backspace') {
         onDelete()
+      } else if (e.code === 'Space') {
+        onChar(' ')
       } else {
         const key = e.key.toUpperCase()
         if (key.length === 1 && key >= 'A' && key <= 'Z') {
@@ -56,6 +58,9 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
         <Key value="I" onClick={onClick} status={charStatuses['I']} />
         <Key value="O" onClick={onClick} status={charStatuses['O']} />
         <Key value="P" onClick={onClick} status={charStatuses['P']} />
+        <Key width={65.4} value="DELETE" onClick={onClick}>
+          {DELETE_TEXT}
+        </Key>
       </div>
       <div className="flex justify-center mb-1">
         <Key value="A" onClick={onClick} status={charStatuses['A']} />
@@ -67,21 +72,21 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
         <Key value="J" onClick={onClick} status={charStatuses['J']} />
         <Key value="K" onClick={onClick} status={charStatuses['K']} />
         <Key value="L" onClick={onClick} status={charStatuses['L']} />
-      </div>
-      <div className="flex justify-center">
         <Key width={65.4} value="ENTER" onClick={onClick}>
           {ENTER_TEXT}
         </Key>
+      </div>
+      <div className="flex justify-center">
         <Key value="Z" onClick={onClick} status={charStatuses['Z']} />
         <Key value="X" onClick={onClick} status={charStatuses['X']} />
         <Key value="C" onClick={onClick} status={charStatuses['C']} />
         <Key value="V" onClick={onClick} status={charStatuses['V']} />
+        <Key width={130.8} value=" " onClick={onClick} status={charStatuses[' ']}>
+          {SPACE_TEXT}
+        </Key>
         <Key value="B" onClick={onClick} status={charStatuses['B']} />
         <Key value="N" onClick={onClick} status={charStatuses['N']} />
         <Key value="M" onClick={onClick} status={charStatuses['M']} />
-        <Key width={65.4} value="DELETE" onClick={onClick}>
-          {DELETE_TEXT}
-        </Key>
       </div>
     </div>
   )
