@@ -10,17 +10,17 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
   return (
     <BaseModal title="How to play" isOpen={isOpen} handleClose={handleClose}>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        Guess an NBA player last name in 8 tries. The answer is
-        less than or equal to 10 letters, so <b> Antetokounmpo </b>
+        Guess an NBA player last name in 8 tries. The answer is less than or
+        equal to 10 letters, so <b> Antetokounmpo </b>
         will never be the answer.
       </p>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        Special characters like " . " and " ' " will be ignored,
-        so " O'Neal " should be " ONeal ".
+        Special characters like " . " and " ' " will be ignored, so " O'Neal "
+        should be " ONeal ".
       </p>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        After each guess, the color of the tiles will
-        change to show how close your guess was to the word.
+        After each guess, the color of the tiles will change to show how close
+        your guess was to the word.
       </p>
 
       <div className="flex justify-center mb-1 mt-4">

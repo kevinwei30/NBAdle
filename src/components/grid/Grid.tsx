@@ -19,7 +19,7 @@ export const Grid = ({ guesses, currentGuess }: Props) => {
     <div className="pb-6">
       <div className="flex justify-center mb-1">
         {Array.from(Array(MAX_WORD_LENGTH).keys()).map((_, i) => (
-          <Cell key={i} value={(i+1).toString()} />
+          <Cell key={i} value={(i + 1).toString()} />
         ))}
       </div>
       {guesses.map((guess, i) => (

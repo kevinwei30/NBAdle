@@ -290,5 +290,5 @@ export const WORDS = [
   'Neil Johnston',
   'Dick Garmaker',
   'Clyde Lovellette',
-  'Jack George'
+  'Jack George',
 ]

@@ -3,17 +3,15 @@ import { AS_NAMES } from '../constants/as_names'
 import { VALIDGUESSES } from '../constants/validGuesses'
 import { INFOS } from '../constants/player_info'
 
-const GUESSES = VALIDGUESSES.map(x => {
+const GUESSES = VALIDGUESSES.map((x) => {
   var x_split = x.split(' ')
   return x_split[x_split.length - 1].toUpperCase()
 })
 
 export const isWordInWordList = (word: string) => {
-  return (
-    GUESSES.includes(word)
-    // WORDS.includes(word.toLowerCase()) ||
-    // VALIDGUESSES.includes(word.toLowerCase())
-  )
+  return GUESSES.includes(word)
+  // WORDS.includes(word.toLowerCase()) ||
+  // VALIDGUESSES.includes(word.toLowerCase())
 }
 
 export const isWinningWord = (word: string) => {
@@ -38,14 +36,14 @@ export const getWordOfDay = () => {
   const infos = [
     `Answer Length : ${answer.length}`,
     `Play Team : ${info.team}`,
-    `First Name : ${first_name}`
+    `First Name : ${first_name}`,
   ]
 
   return {
     solution: answer,
     solutionIndex: index,
     tomorrow: nextday,
-    hints: infos
+    hints: infos,
   }
 }
 

@@ -441,5 +441,5 @@ export const AS_NAMES = [
   'Zion Williamson',
   'Kevin Willis',
   'Metta World Peace',
-  'Max Zaslofsky'
+  'Max Zaslofsky',
 ]
