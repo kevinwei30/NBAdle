@@ -2,7 +2,7 @@ import { KeyValue } from '../../lib/keyboard'
 import { getStatuses } from '../../lib/statuses'
 import { Key } from './Key'
 import { useEffect } from 'react'
-import { ENTER_TEXT, DELETE_TEXT, SPACE_TEXT } from '../../constants/strings'
+import { ENTER_TEXT, DELETE_TEXT } from '../../constants/strings'
 
 type Props = {
   onChar: (value: string) => void
