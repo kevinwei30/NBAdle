@@ -15,8 +15,8 @@ export const HintsModal = ({
 }: Props) => {
   var guess_count = guesses.length
   if (guess_count >= 3) {
-    if (guess_count >= 6) {
-      if (guess_count >= 9) {
+    if (guess_count >= 5) {
+      if (guess_count >= 7) {
         return (
           <BaseModal title={HINTS_TITLE} isOpen={isOpen} handleClose={handleClose}>
             <p className="text-sm text-gray-500 dark:text-gray-300">

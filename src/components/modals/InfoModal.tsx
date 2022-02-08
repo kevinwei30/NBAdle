@@ -10,16 +10,13 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
   return (
     <BaseModal title="How to play" isOpen={isOpen} handleClose={handleClose}>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        Guess an NBA player name in 10 tries. The answer is
-        less than 20 letters (including space), so <b>Giannis Antetokounmpo </b>
-        will never be the answer.
+        Guess an NBA player last name in 8 tries. The answer is
+        less than 10 letters, so <b> Antetokounmpo </b> will
+        never be the answer.
       </p>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        Characters " . " and " ' " will be ignored, so
-        "C.J. McCollum" should be "CJ McCollum", and "Shaquille O'Neal"
-        should be "Shaquille ONeal".
-        Character " - " will be replaced by space, so
-        "Karl-Anthony Towns" should be "Karl Anthony Towns".
+        Special characters like " . " and " ' " will be ignored,
+        so "O'Neal" should be "ONeal".
       </p>
       <p className="text-sm text-gray-500 dark:text-gray-300">
         After each guess, the color of the tiles will

@@ -134,7 +134,7 @@ function App() {
       return
     }
     // if (!(currentGuess.length === MAX_WORD_LENGTH)) {
-    if (!(currentGuess.length > 3)) {
+    if (!(currentGuess.length > 1)) {
       setIsNotEnoughLetters(true)
       return setTimeout(() => {
         setIsNotEnoughLetters(false)
@@ -157,6 +157,10 @@ function App() {
     ) {
       setGuesses([...guesses, currentGuess.padEnd(MAX_WORD_LENGTH, '-')])
       setCurrentGuess('')
+
+      if ([2, 4, 6].includes(guesses.length)) {
+        setIsHintsModalOpen(true)
+      }
 
       if (winningWord) {
         setStats(addStatsForCompletedGame(stats, guesses.length))
