@@ -115,12 +115,6 @@ function App() {
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
-      // if (currentGuess.length === 0 ||
-      //   currentGuess.slice(currentGuess.length - 1) === ' ') {
-      //   value = value.toUpperCase()
-      // } else {
-      //   value = value.toLowerCase()
-      // }
       setCurrentGuess(`${currentGuess}${value}`)
     }
   }
@@ -195,13 +189,6 @@ function App() {
           className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
           onClick={() => setIsInfoModalOpen(true)}
         />
-        <RefreshIcon
-          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-          onClick={() => {
-            clearGameStateFromLocalStorage()
-            window.location.reload()
-          }}
-        />
         <LightBulbIcon
           className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
           onClick={() => setIsHintsModalOpen(true)}
@@ -209,6 +196,13 @@ function App() {
         <ChartBarIcon
           className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
           onClick={() => setIsStatsModalOpen(true)}
+        />
+        <RefreshIcon
+          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
+          onClick={() => {
+            clearGameStateFromLocalStorage()
+            window.location.reload()
+          }}
         />
       </div>
       <Grid guesses={guesses} currentGuess={currentGuess} />

@@ -1,4 +1,3 @@
-// export const GAME_TITLE = 'GAME'
 export const GAME_TITLE = 'NBAdle'
 
 export const WIN_MESSAGES = ['Great Job!', 'Awesome', 'Well done!']
