@@ -16,10 +16,8 @@ export const CompletedRow = ({ guess, hardMode, round }: Props) => {
   var masked_guess = ''
   if (hardMode) {
     guess.split('').forEach((letter, i) => {
-      if (i % 2 === residue)
-        masked_guess += letter
-      else
-        masked_guess += ' '
+      if (i % 2 === residue) masked_guess += letter
+      else masked_guess += ' '
     })
   } else {
     masked_guess = guess
