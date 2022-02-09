@@ -1,8 +1,15 @@
-# Word Guessing Game
+# Word Guessing Game - NBAdle
 
-This is a clone project of that popular word guessing game we all know and love. Made using React, Typescript, and Tailwind.
+This is a forked and modified version of an open source react-wordle repo (https://github.com/cwackerfuss/react-wordle)
 
-[**Try out the demo!**](https://word-guessing-game-cwackerfuss.vercel.app/)
+The goal is to guess an NBA player last name in 8 tries.
+The answer is less than or equal to 10 letters, so **Antetokounmpo** will never be the answer.
+Special characters like " . " and " ' " will be ignored, so **O'Neal** should be **ONeal**.
+
+In addition, there will be hints popping up when your guess is wrong in 3, 5, 7 rounds.
+You can check the hints by clicking the lightbulb icon.
+
+[**Try out NBAdle!**](https://kevinwei30.github.io/word-guessing-game/)
 
 ## Build and run
 ### To Run Locally:
@@ -22,14 +29,6 @@ $> docker run -d -p 3000:3000 game
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in browser.
-
-## Projects built using this repo:
-- https://www.taylordle.com/
-- https://converged.yt/primel/
-- https://nezza.github.io/syscordle/
-- https://www.mathler.com/
-
-_If your site was listed in error, let us know. All the sites listed appear to be created with this code but it's possible they similarities are uncanny!_
 
 ## FAQ
 
