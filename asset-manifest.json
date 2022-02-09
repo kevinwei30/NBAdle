@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/NBAdle/static/css/main.526e2e13.css",
+    "main.js": "/NBAdle/static/js/main.aeca4e91.js",
+    "static/js/787.b3f9d252.chunk.js": "/NBAdle/static/js/787.b3f9d252.chunk.js",
+    "index.html": "/NBAdle/index.html",
+    "main.526e2e13.css.map": "/NBAdle/static/css/main.526e2e13.css.map",
+    "main.aeca4e91.js.map": "/NBAdle/static/js/main.aeca4e91.js.map",
+    "787.b3f9d252.chunk.js.map": "/NBAdle/static/js/787.b3f9d252.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.526e2e13.css",
+    "static/js/main.aeca4e91.js"
+  ]
+}
