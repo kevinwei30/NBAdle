@@ -12,9 +12,20 @@ type Props = {
 
 export const CompletedRow = ({ guess, hardMode, round }: Props) => {
   if (guess.replace('-', '') === solution) hardMode = false
-  guess = guess.padEnd(MAX_WORD_LENGTH, '-')
-  const statuses = getGuessStatuses(guess)
   const residue = round % 2
+  var masked_guess = ''
+  if (hardMode) {
+    guess.split('').forEach((letter, i) => {
+      if (i % 2 === residue)
+        masked_guess += letter
+      else
+        masked_guess += ' '
+    })
+  } else {
+    masked_guess = guess
+  }
+  guess = guess.padEnd(MAX_WORD_LENGTH, '-')
+  const statuses = getGuessStatuses(masked_guess)
   return (
     <div className="flex justify-center mb-1">
       {guess.split('').map((letter, i) => {
