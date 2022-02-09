@@ -3,7 +3,7 @@ import { getGuessStatuses } from '../../lib/statuses'
 import { CompletedCell } from './CompletedCell'
 
 type Props = {
-  guess: string,
+  guess: string
   hardMode: boolean
 }
 
@@ -13,7 +13,14 @@ export const CompletedRow = ({ guess, hardMode }: Props) => {
   return (
     <div className="flex justify-center mb-1">
       {guess.split('').map((letter, i) => {
-        return <CompletedCell key={i} value={letter} status={statuses[i]} hardMode={hardMode} />
+        return (
+          <CompletedCell
+            key={i}
+            value={letter}
+            status={statuses[i]}
+            hardMode={hardMode}
+          />
+        )
         // if (i % 2 === 0)
         //   return <CompletedCell key={i} value={letter} status={statuses[i]} hardMode={hardMode} />
         // else

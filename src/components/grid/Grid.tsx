@@ -6,7 +6,7 @@ import { Cell } from './Cell'
 
 type Props = {
   guesses: string[]
-  currentGuess: string,
+  currentGuess: string
   hardMode: boolean
 }
 
@@ -24,7 +24,11 @@ export const Grid = ({ guesses, currentGuess, hardMode }: Props) => {
         ))}
       </div>
       {guesses.map((guess, i) => (
-        <CompletedRow key={i} guess={guess.padEnd(MAX_WORD_LENGTH, '-')} hardMode={hardMode} />
+        <CompletedRow
+          key={i}
+          guess={guess.padEnd(MAX_WORD_LENGTH, '-')}
+          hardMode={hardMode}
+        />
       ))}
       {guesses.length < MAX_CHALLENGES && <CurrentRow guess={currentGuess} />}
       {/*{empties.map((_, i) => (
