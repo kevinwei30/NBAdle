@@ -36,6 +36,6 @@ export const generateEmojiGrid = (guesses: string[]) => {
           return `${idx + 1}. ${result}`
         }
       })
-      .join('\n') + '\n\nhttps://kevinwei30.github.io/word-guessing-game/'
+      .join('\n') + '\n\nhttps://kevinwei30.github.io/NBAdle'
   )
 }

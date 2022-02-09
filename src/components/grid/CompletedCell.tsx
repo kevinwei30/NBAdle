@@ -19,8 +19,8 @@ export const CompletedCell = ({ value, status, hardMode }: Props) => {
       'shadowed bg-green-500 text-white border-green-500': status === 'correct',
       'shadowed bg-yellow-500 dark:bg-yellow-700 text-white border-yellow-500 dark:border-yellow-700':
         status === 'present',
-      'shadowed bg-blue-500 dark:bg-blue-500 text-white border-blue-500 dark:border-blue-500':
-        hardMode === true && status && status !== 'absent',
+      // 'shadowed bg-blue-500 dark:bg-blue-500 text-white border-blue-500 dark:border-blue-500':
+      //   hardMode === true && status && status !== 'absent',
       'cell-animation': !!value,
     }
   )

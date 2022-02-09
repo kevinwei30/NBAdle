@@ -1,5 +1,6 @@
 import { KeyValue } from '../../lib/keyboard'
 import { getStatuses } from '../../lib/statuses'
+import { solution } from '../../lib/words'
 import { Key } from './Key'
 import { useEffect } from 'react'
 import { ENTER_TEXT, DELETE_TEXT } from '../../constants/strings'
@@ -19,6 +20,25 @@ export const Keyboard = ({
   guesses,
   hardMode,
 }: Props) => {
+  if (hardMode) {
+    var new_guesses:string[] = []
+    guesses.forEach((word, round) => {
+      if (word === solution) {
+        new_guesses.push(word)
+      } else {
+        const residue = round % 2
+        var new_word = ''
+        word.split('').forEach((letter, i) => {
+          if (i % 2 === residue)
+            new_word += letter
+          else
+            new_word += ' '
+        })
+        new_guesses.push(new_word)
+      }
+    })
+    guesses = new_guesses
+  }
   const charStatuses = getStatuses(guesses)
 
   const onClick = (value: KeyValue) => {

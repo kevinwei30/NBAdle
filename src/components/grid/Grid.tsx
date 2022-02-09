@@ -26,8 +26,9 @@ export const Grid = ({ guesses, currentGuess, hardMode }: Props) => {
       {guesses.map((guess, i) => (
         <CompletedRow
           key={i}
-          guess={guess.padEnd(MAX_WORD_LENGTH, '-')}
+          guess={guess}
           hardMode={hardMode}
+          round={i}
         />
       ))}
       {guesses.length < MAX_CHALLENGES && <CurrentRow guess={currentGuess} />}

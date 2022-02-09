@@ -30,8 +30,8 @@ export const Key = ({
         status === 'correct',
       'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 dark:bg-yellow-700 text-white':
         status === 'present',
-      'bg-blue-500 hover:bg-blue-600 active:bg-blue-500 dark:bg-blue-500 text-white':
-        hardMode === true && status && status !== 'absent',
+      // 'bg-blue-500 hover:bg-blue-600 active:bg-blue-500 dark:bg-blue-500 text-white':
+      //   hardMode === true && status && status !== 'absent',
     }
   )
 
