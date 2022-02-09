@@ -21,7 +21,7 @@ export const Keyboard = ({
   hardMode,
 }: Props) => {
   if (hardMode) {
-    var new_guesses:string[] = []
+    var new_guesses: string[] = []
     guesses.forEach((word, round) => {
       if (word === solution) {
         new_guesses.push(word)
@@ -29,10 +29,8 @@ export const Keyboard = ({
         const residue = round % 2
         var new_word = ''
         word.split('').forEach((letter, i) => {
-          if (i % 2 === residue)
-            new_word += letter
-          else
-            new_word += ' '
+          if (i % 2 === residue) new_word += letter
+          else new_word += ' '
         })
         new_guesses.push(new_word)
       }

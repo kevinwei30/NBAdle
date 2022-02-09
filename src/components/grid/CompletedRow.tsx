@@ -11,8 +11,7 @@ type Props = {
 }
 
 export const CompletedRow = ({ guess, hardMode, round }: Props) => {
-  if (guess.replace('-', '') === solution)
-    hardMode = false
+  if (guess.replace('-', '') === solution) hardMode = false
   guess = guess.padEnd(MAX_WORD_LENGTH, '-')
   const statuses = getGuessStatuses(guess)
   const residue = round % 2
@@ -21,11 +20,25 @@ export const CompletedRow = ({ guess, hardMode, round }: Props) => {
       {guess.split('').map((letter, i) => {
         if (hardMode) {
           if (i % 2 === residue)
-            return <CompletedCell key={i} value={letter} status={statuses[i]} hardMode={hardMode} />
+            return (
+              <CompletedCell
+                key={i}
+                value={letter}
+                status={statuses[i]}
+                hardMode={hardMode}
+              />
+            )
           else
             return <CompletedCell key={i} value={letter} hardMode={hardMode} />
         } else {
-          return <CompletedCell key={i} value={letter} status={statuses[i]} hardMode={hardMode} />
+          return (
+            <CompletedCell
+              key={i}
+              value={letter}
+              status={statuses[i]}
+              hardMode={hardMode}
+            />
+          )
         }
       })}
     </div>
