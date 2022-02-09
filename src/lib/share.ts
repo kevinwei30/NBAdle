@@ -12,27 +12,30 @@ export const shareStatus = (guesses: string[], lost: boolean) => {
 }
 
 export const generateEmojiGrid = (guesses: string[]) => {
-  return guesses
-    .map((guess, idx) => {
-      const status = getGuessStatuses(guess)
-      const result = guess.padEnd(MAX_WORD_LENGTH, '-')
-        .split('')
-        .map((_, i) => {
-          switch (status[i]) {
-            case 'correct':
-              return '🟩'
-            case 'present':
-              return '🟨'
-            default:
-              return '⬜'
-          }
-        })
-        .join('')
-      if (isGuessCorrect(guess)) {
-        return `${idx + 1}. All 🟩 -> correct answer!`
-      } else {
-        return `${idx + 1}. ${result}`
-      }
-    })
-    .join('\n')
+  return (
+    guesses
+      .map((guess, idx) => {
+        const status = getGuessStatuses(guess)
+        const result = guess
+          .padEnd(MAX_WORD_LENGTH, '-')
+          .split('')
+          .map((_, i) => {
+            switch (status[i]) {
+              case 'correct':
+                return '🟩'
+              case 'present':
+                return '🟨'
+              default:
+                return '⬜'
+            }
+          })
+          .join('')
+        if (isGuessCorrect(guess)) {
+          return `${idx + 1}. All 🟩 -> correct answer!`
+        } else {
+          return `${idx + 1}. ${result}`
+        }
+      })
+      .join('\n') + '\n\nhttps://kevinwei30.github.io/word-guessing-game/'
+  )
 }
