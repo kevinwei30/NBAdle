@@ -8,7 +8,8 @@ type Props = {
   value: KeyValue
   width?: number
   status?: CharStatus
-  onClick: (value: KeyValue) => void
+  onClick: (value: KeyValue) => void,
+  hardMode: boolean
 }
 
 export const Key = ({
@@ -17,6 +18,7 @@ export const Key = ({
   width = 40,
   value,
   onClick,
+  hardMode
 }: Props) => {
   const classes = classnames(
     'flex items-center justify-center rounded mx-0.5 text-xs font-bold cursor-pointer select-none dark:text-white',
@@ -28,6 +30,8 @@ export const Key = ({
         status === 'correct',
       'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 dark:bg-yellow-700 text-white':
         status === 'present',
+      'bg-blue-500 hover:bg-blue-600 active:bg-blue-500 dark:bg-blue-500 text-white':
+        hardMode === true && status && status !== 'absent',
     }
   )
 

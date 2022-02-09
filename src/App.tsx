@@ -4,7 +4,9 @@ import {
   SunIcon,
   MoonIcon,
   LightBulbIcon,
-  RefreshIcon,
+  TrashIcon,
+  EyeIcon,
+  EyeOffIcon,
 } from '@heroicons/react/outline'
 import { useState, useEffect } from 'react'
 import { Alert } from './components/alerts/Alert'
@@ -57,6 +59,7 @@ function App() {
       ? true
       : false
   )
+  const [isHardMode, setIsHardMode] = useState(false)
   const [successAlert, setSuccessAlert] = useState('')
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
@@ -86,6 +89,10 @@ function App() {
   const handleDarkMode = (isDark: boolean) => {
     setIsDarkMode(isDark)
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
+  }
+
+  const handleHardMode = (isHard: boolean) => {
+    setIsHardMode(isHard)
   }
 
   useEffect(() => {
@@ -158,6 +165,7 @@ function App() {
 
       if (winningWord) {
         setStats(addStatsForCompletedGame(stats, guesses.length))
+        setIsHardMode(false)
         return setIsGameWon(true)
       }
 
@@ -193,11 +201,22 @@ function App() {
           className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
           onClick={() => setIsHintsModalOpen(true)}
         />
+        {isHardMode ? (
+          <EyeIcon
+            className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+            onClick={() => handleHardMode(!isHardMode)}
+          />
+        ) : (
+          <EyeOffIcon
+            className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+            onClick={() => handleHardMode(!isHardMode)}
+          />
+        )}
         <ChartBarIcon
           className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
           onClick={() => setIsStatsModalOpen(true)}
         />
-        <RefreshIcon
+        <TrashIcon
           className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
           onClick={() => {
             clearGameStateFromLocalStorage()
@@ -205,12 +224,17 @@ function App() {
           }}
         />
       </div>
-      <Grid guesses={guesses} currentGuess={currentGuess} />
+      <Grid
+        guesses={guesses}
+        currentGuess={currentGuess}
+        hardMode={isHardMode}
+      />
       <Keyboard
         onChar={onChar}
         onDelete={onDelete}
         onEnter={onEnter}
         guesses={guesses}
+        hardMode={isHardMode}
       />
       <InfoModal
         isOpen={isInfoModalOpen}
