@@ -23,7 +23,7 @@ export const Grid = ({ guesses, currentGuess }: Props) => {
         ))}
       </div>
       {guesses.map((guess, i) => (
-        <CompletedRow key={i} guess={guess} />
+        <CompletedRow key={i} guess={guess.padEnd(MAX_WORD_LENGTH, '-')} />
       ))}
       {guesses.length < MAX_CHALLENGES && <CurrentRow guess={currentGuess} />}
       {/*{empties.map((_, i) => (

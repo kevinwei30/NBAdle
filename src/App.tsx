@@ -149,7 +149,7 @@ function App() {
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
-      setGuesses([...guesses, currentGuess.padEnd(MAX_WORD_LENGTH, '-')])
+      setGuesses([...guesses, currentGuess])
       setCurrentGuess('')
 
       if ([2, 4, 6].includes(guesses.length)) {

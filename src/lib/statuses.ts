@@ -101,3 +101,7 @@ export const getGuessStatuses = (guess: string): CharStatus[] => {
 
   return statuses
 }
+
+export const isGuessCorrect = (guess: string): boolean => {
+  return guess.substr(0, solution.length) === solution
+}

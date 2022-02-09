@@ -1,7 +1,7 @@
-import { getGuessStatuses } from './statuses'
+import { getGuessStatuses, isGuessCorrect } from './statuses'
 import { solutionIndex } from './words'
 import { GAME_TITLE } from '../constants/strings'
-import { MAX_CHALLENGES } from '../constants/settings'
+import { MAX_CHALLENGES, MAX_WORD_LENGTH } from '../constants/settings'
 
 export const shareStatus = (guesses: string[], lost: boolean) => {
   navigator.clipboard.writeText(
@@ -13,9 +13,9 @@ export const shareStatus = (guesses: string[], lost: boolean) => {
 
 export const generateEmojiGrid = (guesses: string[]) => {
   return guesses
-    .map((guess) => {
+    .map((guess, idx) => {
       const status = getGuessStatuses(guess)
-      return guess
+      const result = guess.padEnd(MAX_WORD_LENGTH, '-')
         .split('')
         .map((_, i) => {
           switch (status[i]) {
@@ -28,6 +28,11 @@ export const generateEmojiGrid = (guesses: string[]) => {
           }
         })
         .join('')
+      if (isGuessCorrect(guess)) {
+        return `${idx + 1}. All 🟩 -> correct answer!`
+      } else {
+        return `${idx + 1}. ${result}`
+      }
     })
     .join('\n')
 }
