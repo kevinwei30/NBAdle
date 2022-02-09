@@ -1,5 +1,6 @@
 // import { WORDS } from '../constants/wordlist'
-import { AS_NAMES } from '../constants/as_names'
+// import { AS_NAMES } from '../constants/as_names'
+import { AS_NAMES } from '../constants/as_names_after_1990'
 import { VALIDGUESSES } from '../constants/validGuesses'
 import { INFOS } from '../constants/player_info'
 
