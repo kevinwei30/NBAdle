@@ -1,7 +1,6 @@
 import { getGuessStatuses } from '../../lib/statuses'
-import { solution } from '../../lib/words'
-// import { Cell } from './Cell'
-import { CompletedCell } from './CompletedCell'
+import { solution, maskGuess } from '../../lib/words'
+import { Cell } from './Cell'
 import { MAX_WORD_LENGTH } from '../../constants/settings'
 
 type Props = {
@@ -15,10 +14,7 @@ export const CompletedRow = ({ guess, hardMode, round }: Props) => {
   const residue = round % 2
   var masked_guess = ''
   if (hardMode) {
-    guess.split('').forEach((letter, i) => {
-      if (i % 2 === residue) masked_guess += letter
-      else masked_guess += ' '
-    })
+    masked_guess = maskGuess(guess, round)
   } else {
     masked_guess = guess
   }
@@ -29,25 +25,10 @@ export const CompletedRow = ({ guess, hardMode, round }: Props) => {
       {guess.split('').map((letter, i) => {
         if (hardMode) {
           if (i % 2 === residue)
-            return (
-              <CompletedCell
-                key={i}
-                value={letter}
-                status={statuses[i]}
-                hardMode={hardMode}
-              />
-            )
-          else
-            return <CompletedCell key={i} value={letter} hardMode={hardMode} />
+            return <Cell key={i} value={letter} status={statuses[i]} />
+          else return <Cell key={i} value={letter} />
         } else {
-          return (
-            <CompletedCell
-              key={i}
-              value={letter}
-              status={statuses[i]}
-              hardMode={hardMode}
-            />
-          )
+          return <Cell key={i} value={letter} status={statuses[i]} />
         }
       })}
     </div>

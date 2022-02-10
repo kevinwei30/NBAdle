@@ -256,6 +256,8 @@ function App() {
         isOpen={isHintsModalOpen}
         handleClose={() => setIsHintsModalOpen(false)}
         guesses={guesses}
+        isGameLost={isGameLost}
+        isGameWon={isGameWon}
       />
       <AboutModal
         isOpen={isAboutModalOpen}
