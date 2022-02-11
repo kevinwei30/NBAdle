@@ -11,7 +11,6 @@ ReactDOM.render(
     <Router>
       <Routes>
         <Route path="/NBAdle" element={<App />} />
-        <Route path="/NBAdle/random" element={<App />} />
       </Routes>
     </Router>
   </React.StrictMode>,

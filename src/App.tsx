@@ -238,7 +238,7 @@ function App() {
           className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
           onClick={() => {
             window.location.href = `${window.location.origin}/NBAdle${
-              isRandomMode ? '' : '/random'
+              isRandomMode ? '' : '?mode=random'
             }`
           }}
         />

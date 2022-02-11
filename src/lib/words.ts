@@ -20,7 +20,7 @@ export const isWinningWord = (word: string) => {
 }
 
 export const getWordOfDay = (url: string) => {
-  const random = url.includes('random')
+  const random = url.includes('?mode=random')
   // January 1, 2022 Game Epoch
   const epochMs = new Date('January 1, 2022 00:00:00').valueOf()
   const now = Date.now()
