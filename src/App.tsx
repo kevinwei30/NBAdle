@@ -159,14 +159,14 @@ function App() {
       setGuesses([...guesses, currentGuess])
       setCurrentGuess('')
 
-      if ([2, 4, 6].includes(guesses.length)) {
-        setIsHintsModalOpen(true)
-      }
-
       if (winningWord) {
         setStats(addStatsForCompletedGame(stats, guesses.length))
         setIsHardMode(false)
         return setIsGameWon(true)
+      }
+
+      if ([2, 4, 6].includes(guesses.length)) {
+        setIsHintsModalOpen(true)
       }
 
       if (guesses.length === MAX_CHALLENGES - 1) {
