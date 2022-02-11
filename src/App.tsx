@@ -7,6 +7,7 @@ import {
   TrashIcon,
   EyeIcon,
   EyeOffIcon,
+  SwitchHorizontalIcon,
 } from '@heroicons/react/outline'
 import { useState, useEffect } from 'react'
 import { Alert } from './components/alerts/Alert'
@@ -32,6 +33,7 @@ import {
   isWinningWord,
   solution,
   player_name,
+  isRandomMode,
 } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
@@ -167,25 +169,27 @@ function App() {
       setCurrentGuess('')
 
       if (winningWord) {
-        setStats(addStatsForCompletedGame(stats, guesses.length))
+        if (!isRandomMode)
+          setStats(addStatsForCompletedGame(stats, guesses.length))
         setIsHardMode(false)
         return setIsGameWon(true)
       }
 
-      if ([2, 4, 6].includes(guesses.length)) {
-        setIsHintsModalOpen(true)
+      if (guesses.length === MAX_CHALLENGES - 1) {
+        if (!isRandomMode)
+          setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        setIsGameLost(true)
       }
 
-      if (guesses.length === MAX_CHALLENGES - 1) {
-        setStats(addStatsForCompletedGame(stats, guesses.length + 1))
-        setIsGameLost(true)
+      if ([2, 4, 6].includes(guesses.length)) {
+        setIsHintsModalOpen(true)
       }
     }
   }
 
   return (
     <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div className="flex w-80 mx-auto items-center mb-8 mt-12">
+      <div className="flex w-80 mx-auto items-center mb-2 mt-4">
         <h1 className="text-xl ml-2.5 grow font-bold dark:text-white">
           {GAME_TITLE}
         </h1>
@@ -220,16 +224,29 @@ function App() {
           />
         )}
         <ChartBarIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
+          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
           onClick={() => setIsStatsModalOpen(true)}
         />
         <TrashIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
+          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
           onClick={() => {
             clearGameStateFromLocalStorage()
             window.location.reload()
           }}
         />
+        <SwitchHorizontalIcon
+          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+          onClick={() => {
+            window.location.href = `${window.location.origin}/NBAdle${
+              isRandomMode ? '' : '/random'
+            }`
+          }}
+        />
+      </div>
+      <div className="flex w-80 mx-auto items-center mb-4 mt-2">
+        <h4 className="text-m ml-2.5 grow font-bold dark:text-white">
+          {`${isRandomMode ? '(random mode)' : ''}`}
+        </h4>
       </div>
       <Grid
         guesses={guesses}
@@ -258,6 +275,7 @@ function App() {
           setSuccessAlert(GAME_COPIED_MESSAGE)
           return setTimeout(() => setSuccessAlert(''), ALERT_TIME_MS)
         }}
+        isRandomMode={isRandomMode}
       />
       <HintsModal
         isOpen={isHintsModalOpen}

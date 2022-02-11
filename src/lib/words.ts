@@ -13,21 +13,22 @@ const valid_words = VALIDGUESSES.map((x) => {
 
 export const isWordInWordList = (word: string) => {
   return valid_words.includes(word)
-  // WORDS.includes(word.toLowerCase()) ||
-  // VALIDGUESSES.includes(word.toLowerCase())
 }
 
 export const isWinningWord = (word: string) => {
   return solution === word
 }
 
-export const getWordOfDay = () => {
+export const getWordOfDay = (url: string) => {
+  const random = url.includes('random')
   // January 1, 2022 Game Epoch
   const epochMs = new Date('January 1, 2022 00:00:00').valueOf()
   const now = Date.now()
   const msInDay = 86400000
   const interval = msInDay / 2
-  const index = Math.floor((now - epochMs) / interval)
+  const index = random
+    ? Math.floor(Math.random() * PLAYER_NAMES.length)
+    : Math.floor((now - epochMs) / interval)
   const nextday = (index + 1) * interval + epochMs
   const name = PLAYER_NAMES[index % PLAYER_NAMES.length]
   var name_split = name.split(' ')
@@ -49,11 +50,18 @@ export const getWordOfDay = () => {
     solutionIndex: index,
     tomorrow: nextday,
     hints: infos,
+    isRandomMode: random,
   }
 }
 
-export const { player_name, solution, solutionIndex, tomorrow, hints } =
-  getWordOfDay()
+export const {
+  player_name,
+  solution,
+  solutionIndex,
+  tomorrow,
+  hints,
+  isRandomMode,
+} = getWordOfDay(window.location.href)
 
 export const maskGuess = (word: string, round: number) => {
   const residue = round % 2
