@@ -10,7 +10,12 @@ type Props = {
   variant?: 'success' | 'warning'
 }
 
-export const Alert = ({ isOpen, message, guess = '', variant = 'warning' }: Props) => {
+export const Alert = ({
+  isOpen,
+  message,
+  guess = '',
+  variant = 'warning',
+}: Props) => {
   const classes = classNames(
     'fixed top-5 left-1/2 transform -translate-x-1/2 max-w-sm w-full shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden',
     {
@@ -19,8 +24,7 @@ export const Alert = ({ isOpen, message, guess = '', variant = 'warning' }: Prop
     }
   )
   const similar_word = similarWord(guess)
-  if (similar_word)
-    message += `, maybe you mean "${similar_word}" ?`
+  if (similar_word) message += `, maybe you mean "${similar_word}" ?`
 
   return (
     <Transition
