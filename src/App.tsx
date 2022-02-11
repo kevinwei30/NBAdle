@@ -24,9 +24,15 @@ import {
   NOT_ENOUGH_LETTERS_MESSAGE,
   WORD_NOT_FOUND_MESSAGE,
   CORRECT_WORD_MESSAGE,
+  PLAYER_NAME_MESSAGE,
 } from './constants/strings'
 import { MAX_WORD_LENGTH, MAX_CHALLENGES } from './constants/settings'
-import { isWordInWordList, isWinningWord, solution } from './lib/words'
+import {
+  isWordInWordList,
+  isWinningWord,
+  solution,
+  player_name,
+} from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
@@ -36,7 +42,7 @@ import {
 
 import './App.css'
 
-const ALERT_TIME_MS = 2000
+const ALERT_TIME_MS = 3000
 
 function App() {
   const prefersDarkMode = window.matchMedia(
@@ -102,7 +108,8 @@ function App() {
   useEffect(() => {
     if (isGameWon) {
       setSuccessAlert(
-        WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)]
+        WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)] +
+          PLAYER_NAME_MESSAGE(player_name)
       )
       setTimeout(() => {
         setSuccessAlert('')
@@ -275,9 +282,15 @@ function App() {
       <Alert message={NOT_ENOUGH_LETTERS_MESSAGE} isOpen={isNotEnoughLetters} />
       <Alert
         message={WORD_NOT_FOUND_MESSAGE}
+        guess={currentGuess}
         isOpen={isWordNotFoundAlertOpen}
       />
-      <Alert message={CORRECT_WORD_MESSAGE(solution)} isOpen={isGameLost} />
+      <Alert
+        message={
+          CORRECT_WORD_MESSAGE(solution) + PLAYER_NAME_MESSAGE(player_name)
+        }
+        isOpen={isGameLost}
+      />
       <Alert
         message={successAlert}
         isOpen={successAlert !== ''}

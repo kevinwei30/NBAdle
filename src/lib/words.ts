@@ -4,7 +4,7 @@ import { INFOS } from '../constants/player_info'
 
 const special_parts = ['II', 'III', 'IV', 'Jr']
 
-const GUESSES = VALIDGUESSES.map((x) => {
+const valid_words = VALIDGUESSES.map((x) => {
   var x_split = x.split(' ')
   if (special_parts.includes(x_split[x_split.length - 1]))
     return x_split[x_split.length - 2].toUpperCase()
@@ -12,7 +12,7 @@ const GUESSES = VALIDGUESSES.map((x) => {
 })
 
 export const isWordInWordList = (word: string) => {
-  return GUESSES.includes(word)
+  return valid_words.includes(word)
   // WORDS.includes(word.toLowerCase()) ||
   // VALIDGUESSES.includes(word.toLowerCase())
 }
@@ -63,4 +63,64 @@ export const maskGuess = (word: string, round: number) => {
     else masked_word += ' '
   })
   return masked_word
+}
+
+function editDistance (s1: string, s2: string) {
+  s1 = s1.toLowerCase();
+  s2 = s2.toLowerCase();
+
+  var costs = [];
+  for (var i = 0; i <= s1.length; i++) {
+    var lastValue = i;
+    for (var j = 0; j <= s2.length; j++) {
+      if (i === 0)
+        costs[j] = j;
+      else {
+        if (j > 0) {
+          var newValue = costs[j - 1];
+          if (s1.charAt(i - 1) !== s2.charAt(j - 1))
+            newValue = Math.min(Math.min(newValue, lastValue),
+              costs[j]) + 1;
+          costs[j - 1] = lastValue;
+          lastValue = newValue;
+        }
+      }
+    }
+    if (i > 0)
+      costs[s2.length] = lastValue;
+  }
+  return costs[s2.length];
+}
+
+function getSimilarity (s1: string, s2: string) {
+  var longer = s1;
+  var shorter = s2;
+  if (s1.length < s2.length) {
+    longer = s2;
+    shorter = s1;
+  }
+  var longerLength = longer.length;
+  if (longerLength === 0) {
+    return 1.0;
+  }
+  return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength.toString());
+}
+
+export const similarWord = (guess: string) => {
+  if (guess.length === 0)
+    return null
+  var max_similarity = 0
+  var similar_word = null
+  valid_words.forEach((word) => {
+    var similarity = getSimilarity(guess, word)
+    if (similarity > max_similarity) {
+      max_similarity = similarity
+      similar_word = word
+    }
+  })
+  if (max_similarity >= 0.6) {
+    return similar_word
+  } else {
+    return null
+  }
 }
