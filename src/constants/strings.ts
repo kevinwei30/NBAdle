@@ -6,7 +6,7 @@ export const ABOUT_GAME_MESSAGE = 'About this game'
 export const NOT_ENOUGH_LETTERS_MESSAGE = 'Not enough letters'
 export const WORD_NOT_FOUND_MESSAGE = 'Word not found'
 export const CORRECT_WORD_MESSAGE = (solution: string) =>
-  `The answer was "${solution}".`
+  `The answer is "${solution}".`
 export const PLAYER_NAME_MESSAGE = (player_name: string) =>
   ` The player is "${player_name}".`
 export const ENTER_TEXT = 'Enter'

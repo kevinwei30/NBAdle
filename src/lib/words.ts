@@ -40,7 +40,7 @@ export const getWordOfDay = (url: string) => {
   const info = INFOS[name as keyof typeof INFOS]
   const infos = [
     `Answer Length : ${answer.length}`,
-    `Play Team : ${info.team}`,
+    `Played Team : ${info.team}`,
     `First Name : ${first_name}`,
   ]
 

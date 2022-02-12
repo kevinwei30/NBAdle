@@ -40,7 +40,7 @@ export const Alert = ({
       <div className={classes}>
         <div className="p-4">
           <p className="text-sm text-center font-medium text-gray-900">
-            {message}
+            <b>{message}</b>
           </p>
         </div>
       </div>

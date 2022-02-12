@@ -44,7 +44,7 @@ import {
 
 import './App.css'
 
-const ALERT_TIME_MS = 3000
+const ALERT_TIME_MS = 2000
 
 function App() {
   const prefersDarkMode = window.matchMedia(
@@ -69,6 +69,7 @@ function App() {
   )
   const [isHardMode, setIsHardMode] = useState(false)
   const [successAlert, setSuccessAlert] = useState('')
+  const [failAlert, setFailAlert] = useState('')
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
@@ -116,12 +117,16 @@ function App() {
       setTimeout(() => {
         setSuccessAlert('')
         setIsStatsModalOpen(true)
-      }, ALERT_TIME_MS)
+      }, ALERT_TIME_MS * 2)
     }
     if (isGameLost) {
+      setFailAlert(
+        CORRECT_WORD_MESSAGE(solution) + PLAYER_NAME_MESSAGE(player_name)
+      )
       setTimeout(() => {
+        setFailAlert('')
         setIsStatsModalOpen(true)
-      }, ALERT_TIME_MS)
+      }, ALERT_TIME_MS * 2)
     }
   }, [isGameWon, isGameLost])
 
@@ -178,7 +183,7 @@ function App() {
       if (guesses.length === MAX_CHALLENGES - 1) {
         if (!isRandomMode)
           setStats(addStatsForCompletedGame(stats, guesses.length + 1))
-        setIsGameLost(true)
+        return setIsGameLost(true)
       }
 
       if ([2, 4, 6].includes(guesses.length)) {
@@ -303,12 +308,7 @@ function App() {
         guess={currentGuess}
         isOpen={isWordNotFoundAlertOpen}
       />
-      <Alert
-        message={
-          CORRECT_WORD_MESSAGE(solution) + PLAYER_NAME_MESSAGE(player_name)
-        }
-        isOpen={isGameLost}
-      />
+      <Alert message={failAlert} isOpen={failAlert !== ''} />
       <Alert
         message={successAlert}
         isOpen={successAlert !== ''}

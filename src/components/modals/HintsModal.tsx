@@ -30,7 +30,7 @@ export const HintsModal = ({
           3. {hints[2]}
         </p>
         <p className="text-sm text-gray-500 dark:text-gray-300">
-          Player Full Name : {player_name}
+          Player Full Name : <b>{player_name}</b>
         </p>
       </BaseModal>
     )
@@ -82,7 +82,9 @@ export const HintsModal = ({
   }
   return (
     <BaseModal title={HINTS_TITLE} isOpen={isOpen} handleClose={handleClose}>
-      <p className="text-sm text-gray-500 dark:text-gray-300">No Hint Yet</p>
+      <p className="text-sm text-gray-500 dark:text-gray-300">
+        No hint yet, keep trying.
+      </p>
     </BaseModal>
   )
 }
